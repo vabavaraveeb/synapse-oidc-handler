@@ -15,6 +15,7 @@ Just copy the jar and jose4j jar (see [#Dependencies]) into WSO2 lib folder.
  * trustedOauth2Issuers - Issuer that is trusted.
  * expectedAudience - Expected value for audience of the claim. This is optional.
     ![Example of handler properties in IntegrationStudio](doc/handler_properties.png)
+    ```xml
     <!-- Example of configuration with Azure AD. -->
     <handlers>
         <handler class="eu.vabavara.synapse.handlers.oidc.OIDCAuthenticationHandler">
@@ -23,12 +24,14 @@ Just copy the jar and jose4j jar (see [#Dependencies]) into WSO2 lib folder.
             <property name="expectedAudience" value="https://{appurl}"/>
         </handler>
     </handlers>
+    ```
 3. The handler will respond with HTTP 401 Unauthorized in case the token validaion fails. It is up to the application to authorize the user further. The following properties will be pushed to Axis2 scope for this purpose:
  * claim_appid - appid claim (if present).
  * claim_scope - scope claim if present.
  * claim_sub - sub claim if present.
  * claim_aud - aud claim if present.
  * claim_jwt - original JWT token (this can, if necessary, be passed through).
+    ```xml
     <!-- Example of payload factory to extract all pushed Axis2 properties. -->
     <payloadFactory media-type="json">
         <format>{
@@ -46,6 +49,7 @@ Just copy the jar and jose4j jar (see [#Dependencies]) into WSO2 lib folder.
             <arg evaluator="xml" expression="$axis2:claim_aud"/>
         </args>
     </payloadFactory>
+    ```
 
 ## Dependencies
 

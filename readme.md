@@ -11,9 +11,9 @@ Just copy the jar and jose4j jar (see [#Dependencies]) into WSO2 lib folder.
 1. Add the reference to the Handler in the handlers section of your REST API definition.
     ![Example of handler in IntegrationStudio](doc/add_REST_API_handler.png)
 2. Add properties to configure the behaviour of the handler (if missing, these values will be pickeb up from globaal WSO2 configuration):
- * keywsUris - URIs of the keyws page of your auhtentication provider. This URI is usually published in `\[Issuer URL\]/.well-known/openid-configuration` resource.
- * trustedOauth2Issuers - Issuer that is trusted.
- * expectedAudience - Expected value for audience of the claim. This is optional.
+  * keywsUris - URIs of the keyws page of your auhtentication provider. This URI is usually published in `\[Issuer URL\]/.well-known/openid-configuration` resource.
+  * trustedOauth2Issuers - Issuer that is trusted.
+  * expectedAudience - Expected value for audience of the claim. This is optional.
     ![Example of handler properties in IntegrationStudio](doc/handler_properties.png)
     ```xml
     <!-- Example of configuration with Azure AD. -->
@@ -26,11 +26,11 @@ Just copy the jar and jose4j jar (see [#Dependencies]) into WSO2 lib folder.
     </handlers>
     ```
 3. The handler will respond with HTTP 401 Unauthorized in case the token validaion fails. It is up to the application to authorize the user further. The following properties will be pushed to Axis2 scope for this purpose:
- * claim_appid - appid claim (if present).
- * claim_scope - scope claim if present.
- * claim_sub - sub claim if present.
- * claim_aud - aud claim if present.
- * claim_jwt - original JWT token (this can, if necessary, be passed through).
+  * claim_appid - appid claim (if present).
+  * claim_scope - scope claim if present.
+  * claim_sub - sub claim if present.
+  * claim_aud - aud claim if present.
+  * claim_jwt - original JWT token (this can, if necessary, be passed through).
     ```xml
     <!-- Example of payload factory to extract all pushed Axis2 properties. -->
     <payloadFactory media-type="json">
